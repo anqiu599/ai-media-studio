@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #07070c;
+  --color-surface: #0e0e16;
+  --color-surface2: #15151f;
+  --color-surface3: #1c1c29;
+  --color-border: #23232f;
+  --color-border-hover: #3a3a52;
+  --color-text: #a3a3b8;
+  --color-text-dim: #64647e;
+  --color-text-bright: #f2f2f8;
+  --color-accent: #6d5efc;
+  --color-accent-hover: #8b7dff;
+  --color-accent2: #d946ef;
+  --color-accent3: #22d3ee;
+  --color-success: #34d399;
+  --color-warn: #fbbf24;
+  --color-danger: #f87171;
+
+  --font-sans: 'Inter', 'PingFang SC', 'HarmonyOS Sans SC', 'Microsoft YaHei',
+    'Noto Sans SC', system-ui, -apple-system, sans-serif;
+
+  --animate-fade-up: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 0.6s ease both;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-glow: glow 4s ease-in-out infinite;
+  --animate-gradient-pan: gradient-pan 6s ease infinite;
+  --animate-spin-slow: spin 2.4s linear infinite;
+  --animate-shimmer: shimmer 2.4s linear infinite;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-14px) translateX(8px); }
+}
+@keyframes glow {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 0.9; }
+}
+@keyframes gradient-pan {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  background:
+    radial-gradient(1100px 500px at 85% -10%, rgba(109, 94, 252, 0.14), transparent 60%),
+    radial-gradient(900px 480px at -10% 25%, rgba(217, 70, 239, 0.09), transparent 60%),
+    radial-gradient(800px 500px at 60% 110%, rgba(34, 211, 238, 0.08), transparent 60%),
+    var(--color-bg);
+  background-attachment: fixed;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(109, 94, 252, 0.4);
+  color: #fff;
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: #2c2c3e;
+  border-radius: 8px;
+  border: 2px solid var(--color-bg);
+}
+::-webkit-scrollbar-thumb:hover { background: #3f3f58; }
+
+/* ---------- Custom utilities ---------- */
+
+.gradient-text {
+  background: linear-gradient(100deg, #a5b4fc, #d946ef 45%, #22d3ee);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-pan 7s ease infinite;
+}
+
+.glass {
+  background: rgba(18, 18, 28, 0.62);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.card-hover {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: rgba(139, 125, 255, 0.45);
+  box-shadow: 0 16px 48px -16px rgba(109, 94, 252, 0.4);
+}
+
+.btn-primary {
+  position: relative;
+  background: linear-gradient(120deg, #6d5efc, #a855f7 55%, #d946ef);
+  background-size: 180% auto;
+  transition: background-position 0.35s ease, transform 0.15s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 28px -10px rgba(168, 85, 247, 0.55);
+}
+.btn-primary:hover {
+  background-position: right center;
+  box-shadow: 0 12px 36px -10px rgba(168, 85, 247, 0.7);
+}
+.btn-primary:active { transform: scale(0.98); }
+
+.btn-ghost {
+  border: 1px solid var(--color-border);
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+.btn-ghost:hover {
+  border-color: var(--color-border-hover);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--color-text-bright);
+}
+.btn-ghost:active { transform: scale(0.98); }
+
+.chip {
+  border: 1px solid var(--color-border);
+  transition: all 0.2s ease;
+}
+.chip:hover {
+  border-color: var(--color-border-hover);
+  color: var(--color-text-bright);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.ring-glow:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px rgba(139, 125, 255, 0.7);
+}
